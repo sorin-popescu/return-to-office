@@ -1,7 +1,18 @@
-FROM node:latest
+FROM node:12
 
-COPY / /app/api
-ADD docker-entrypoint-init/start.sh /start.sh
-RUN chmod 755 /start.sh
+# Create app directory
+WORKDIR /app
 
-CMD ["/start.sh"]
+# Install app dependencies
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+# where available (npm@5+)
+COPY package*.json ./
+
+RUN npm install
+# If you are building your code for production
+# RUN npm ci --only=production
+
+# Bundle app source
+COPY . /app
+
+CMD [ "node", "app.js" ]
