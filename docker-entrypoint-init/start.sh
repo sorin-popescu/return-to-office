@@ -1,5 +1,5 @@
 #!/bin/bash
-cd /app/api
+cd /app
 npm install
-cd /app/api
+cd /app
 npm start

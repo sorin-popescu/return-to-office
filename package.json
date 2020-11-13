@@ -1,0 +1,19 @@
+{
+    "name": "return-to-office",
+    "version": "1.0.0",
+    "description": "",
+    "main": "app.js",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/sorin-popescu/return-to-office.git"
+    },
+    "keywords": [
+      "nodejs",
+      "bootstrap",
+      "express"
+    ],
+    "dependencies": {
+      "express": "^4.16.4"
+    }
+  }
+  
