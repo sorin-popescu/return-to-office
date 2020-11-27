@@ -1,47 +1,16 @@
-const express = require('express')
-const app = express()
+const express = require('express');
 
-const port = 8080
+const app = express();
+const port = process.env.PORT || 8080;
+const desksRouter = require('./routes/desksRouter')();
 
 app.get('/', (req, res) => {
     res.send('Welcome')
-})
+});
 
-app.get('/desks', (req, res) => {
-    let lendable = {
-        'Floor 1': {
-          'Desk 1': {
-              'status': 'free',
-              'occupant': null
-          },
-          'Desk 2': {
-              'status': 'reserved',
-              'occupant': 'Luis'
-          },
-          'Desk 3': {
-              'status': 'pending',
-              'occupant': 'Alex'
-          }
-        },
-        'Floor 2': {
-          'Desk 1': {
-              'status': 'free',
-              'occupant': null
-          },
-          'Desk 2': {
-              'status': 'reserved',
-              'occupant': 'Filip'
-          },
-          'Desk 3': {
-              'status': 'pending',
-              'occupant': 'Ben'
-          }
-        },
-      }
-
-    res.send(lendable)
-})
+app.use('/api', desksRouter);
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
-})
+});
+
