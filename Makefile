@@ -19,7 +19,7 @@ bash:
 
 ## Docker up
 up:
-	docker-compose up -d
+	docker-compose up -d --remove-orphans
 
 ## Docker down
 down:
