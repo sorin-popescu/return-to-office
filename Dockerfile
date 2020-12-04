@@ -1,19 +1,18 @@
 FROM node:10-alpine
 
-RUN mkdir -p /app/node_modules && chown -R node:node /app
+# Create app directory
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
 
-WORKDIR /app
+# Install dependencies
+COPY package.json .
+COPY yarn.lock .
+RUN yarn
 
-COPY package*.json ./
+# Bundle app source
+COPY . .
 
-RUN npm install -g nodemon
-
-USER node
-
-RUN npm install
-
-COPY --chown=node:node . .
-
+# Exports
 EXPOSE 8080
 
-CMD [ "node", "app.js" ]
+CMD [ "npm", "run", "start.dev" ]

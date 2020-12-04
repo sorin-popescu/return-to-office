@@ -1,1 +1,0 @@
-CREATE DATABASE IF NOT EXISTS return_to_office;

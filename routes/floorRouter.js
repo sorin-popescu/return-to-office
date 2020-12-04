@@ -1,14 +1,13 @@
 const express = require('express');
 
-function routes(Desk) {
-    const desksRouter = express.Router();
-    desksRouter.route('/desks')
+function routes(Floor) {
+    const floorRouter = express.Router();
+    floorRouter.route('/floors')
         .post((req, res) => {
-            const desk = new Desk(req.body);
+            const floor = new Floor(req.body);
             console.log(req.body);
-            desk.save();
-
-            return res.status(201).json(desk);
+            floor.save();
+            return res.status(201).json(floor);
         })
 
         .get((req, res) => {
@@ -16,25 +15,28 @@ function routes(Desk) {
             if (req.query.name) {
                 query.name = req.query.name;
             }
-            Desk.find(query, (err, desks) => {
+            Floor.find(query, (err, floors) => {
                 if (err) {
                     return res.send(err);
                 }
-                return res.json(desks);
+                return res.json(floors);
             });
         })
 
-    desksRouter.route('/desks/:deskId')
+    floorRouter.route('/floors/:floorNo')
         .get((req, res) => {
-            Desk.findById(req.params.deskId, (err, desk) => {
+            const query = {};
+            query.number = req.params.floorNo;
+
+            Floor.find(query, (err, floor) => {
                 if (err) {
                     return res.send(err);
                 }
-                return res.json(desk);
+                return res.json(floor);
             });
         });
 
-    return desksRouter;
+    return floorRouter;
 }
 
 module.exports = routes;
