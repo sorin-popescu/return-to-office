@@ -20,7 +20,7 @@ services:
       - /usr/src/app/node_modules # Remove this if you have pure JS dependencies
     networks:
       - app-network
-    depends_on:
+    depends_o..n:
       - db
 
   db:
